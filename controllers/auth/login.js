@@ -12,6 +12,9 @@ const login = async (req, res) => {
   if (!user || !passCompare) {
     res.status(401).json({ message: 'Email or password is wrong' });
   }
+  if (!user.verify) {
+    res.status(401).json({ message: 'Email not verified' });
+  }
   const payload = {
     id: user.id,
   };
